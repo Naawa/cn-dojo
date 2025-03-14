@@ -37,8 +37,10 @@
 	},
 	"dependencies": {
 		"@neondatabase/serverless": "^0.10.4",
+		"@node-rs/argon2": "^2.0.2",
 		"@oslojs/crypto": "^1.0.1",
 		"@oslojs/encoding": "^1.1.0",
+		"@vercel/blob": "^0.27.3",
 		"drizzle-orm": "^0.38.4"
 	}
 }
