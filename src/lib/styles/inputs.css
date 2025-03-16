@@ -1,4 +1,4 @@
-.custom-file-upload, input, select, option {
+.custom-file-upload, input, textarea, select, option {
     padding: 0.7em 1.3em;
     border: solid 0.16em rgba(200, 210, 219, 0.262);
     border-radius: 0.25em;
@@ -6,7 +6,7 @@
     font-family: "Azo Sans Bold";
     transition: all 0.2s;
 }
-.custom-file-upload:focus, .custom-file-upload:hover, input:focus, input:hover, select:focus, select:hover {
+.custom-file-upload:focus, .custom-file-upload:hover, input:focus, input:hover, select:focus, select:hover, textarea:hover, textarea:focus {
     border: solid 0.16em rgba(151, 170, 194, 0.326);
     transition: all 0.2s;
 }
@@ -30,20 +30,23 @@
 }
 
 @media (width < 1200px) {
-    input, select, option {
+    input, select, option, textarea {
         width: 100%;
     }
 }
+textarea {
+    width: 100%;
+}
 
-option, select {
+option, select, textarea {
     font-size: inherit;
     font-family: "Azo Sans Bold";
 }
 
 select {
-    background-image: url("data:image/svg+xml;utf8,<svg fill='slate' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+    background-image: url("data:image/svg+xml;utf8,<svg fill='%23283f4d' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
     background-repeat: no-repeat;
-    background-position-x: 85%;
+    background-position-x: 95%;
     background-position-y: 45%;
     background-size: 1.5em 1.5em;
     appearance: none;

@@ -15,6 +15,11 @@
     transition: all 0.2s;
 }
 
+.bordered {
+    border: solid 0.16em rgba(200, 210, 219, 0.262);
+    border-radius: 0.5em;
+}
+
 .card:hover {
     border: solid 0.16em rgba(151, 170, 194, 0.326);
     scale: 1.02;

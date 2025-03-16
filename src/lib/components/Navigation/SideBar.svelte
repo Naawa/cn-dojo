@@ -4,7 +4,7 @@
 	import { page } from '$app/state';
 </script>
 
-<nav>
+<nav class="bordered">
 	<img src="/logos/normal.svg" alt="Logo." />
 	<div>
 		{#each navItems as navItem}
@@ -22,15 +22,13 @@
 
 <style>
 	nav {
-		border-right: solid 0.16em rgba(200, 210, 219, 0.262);
 		padding: 4em 1em 4em;
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
 		gap: 1em;
-		min-height: 100vh;
 		height: 100%;
-		width: 100%;
+		width: 14em;
 
 		div {
 			display: flex;

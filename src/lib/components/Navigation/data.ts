@@ -6,7 +6,7 @@ export interface NavItem {
 export const navItems: NavItem[] = [
     {
         url: "/dashboard",
-        text: "Overview"
+        text: "Profile"
     },
     {
         url: "/dashboard/inventory",

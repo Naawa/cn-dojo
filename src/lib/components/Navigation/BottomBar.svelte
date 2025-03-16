@@ -4,7 +4,7 @@
 	import { page } from '$app/state';
 </script>
 
-<nav>
+<nav class="bordered">
 	<div>
 		{#each navItems as navItem}
 			<a class:active={page.url.pathname == navItem.url} href={navItem.url}
@@ -21,12 +21,12 @@
 
 <style>
 	nav {
-		border-top: solid 0.16em rgba(200, 210, 219, 0.262);
 		padding: 1em 0;
 		display: flex;
 		justify-content: center;
 		align-items: center;
 		width: 100%;
+		height: 10vh;
 
 		div {
 			display: flex;
@@ -38,7 +38,6 @@
 				justify-content: center;
 				align-items: center;
 				text-decoration: none;
-				font-size: clamp(1vw, 2vh, 32px);
 				transition: all 0.2s;
 				height: 3em;
 				width: 3em;
@@ -62,10 +61,8 @@
 				height: 3em;
 				width: 3em;
 				padding: 0;
-				font-size: clamp(1vw, 2vh, 32px);
 
 				button {
-					font-size: clamp(1vw, 2vh, 32px);
 					min-width: 3em;
 					padding: 0;
 					height: 3em;
@@ -73,6 +70,9 @@
 					b {
 						color: white;
 					}
+				}
+				button:hover {
+					color: #ca0d0d;
 				}
 			}
 		}

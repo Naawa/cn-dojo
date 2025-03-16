@@ -11,7 +11,7 @@
 </script>
 
 <section>
-	<h1>Overview</h1>	
+	<h1>Profile</h1>	
 	<div class="card">
 		<h2>Hi, {data.student.firstName}!</h2>
 		<p>
