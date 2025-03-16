@@ -1,9 +1,11 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
+	import type { LayoutServerData } from './$types';
 	import type { PageServerData } from './$types';
 
-	let { data }: { data: PageServerData } = $props();
+	let { data }: { data: PageServerData & LayoutServerData } = $props();
 
+	let {student, student_profile } = $derived(data)
 	/**
 	 * Overview
 	 * 1.
@@ -13,7 +15,8 @@
 <section>
 	<h1>Profile</h1>	
 	<div class="card">
-		<h2>Hi, {data.student.firstName}!</h2>
+		<h2>Hi, {student.firstName}!</h2>
+		<h3>You have {student_profile.points} points!</h3>
 		<p>
 			Welcome to your profile!
 		</p>
