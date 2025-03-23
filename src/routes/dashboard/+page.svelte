@@ -53,7 +53,7 @@
 					{#each printHistory as print}
 					<div class="history-item">
 						<strong>{print.file}</strong>
-						<p>{print.date} - <span class={print.status === "Completed" ? "completed" : "pending"}>{print.status}</span></p>
+						<p>{print.date}: <span class={print.status === "Completed" ? "completed" : "pending"}>{print.status}</span></p>
 					</div>
 					{/each}
 				</div>
@@ -66,7 +66,7 @@
 					{#each pointsHistory as history}
 					<div class="history-item">
 						<strong>{history.item}</strong>
-						<p>{history.date} - <span class={history.points > 0 ? "earned" : "spent"}>{history.points} pts</span></p>
+						<p>{history.date}: <span class={history.points > 0 ? "earned" : "spent"}>{history.points} pts</span></p>
 					</div>
 					{/each}
 				</div>

@@ -41,8 +41,12 @@
 	<h2>Shop</h2>
 
 	<!-- Search Bar -->
-	<div class="search-bar">
-		<input type="search" placeholder="Search" />
+	<div class="search-container">
+		<input
+			type="search"
+			placeholder="Search"
+		/>
+		<button>Search</button>
 	</div>
 
 	<!-- Popular Items (Now on Top) -->
@@ -90,9 +94,12 @@
 	}
 
 	/* Search Bar now matches the width of shop-container */
-	.search-bar {
+	.search-container {
 		width: 80%;
 		max-width: 1000px;
+		display: flex;
+		gap: 10px;
+		margin-bottom: 10px;
 	}
 
 	input[type="search"] {
