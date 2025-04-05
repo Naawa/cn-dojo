@@ -38,3 +38,4 @@ export const studentInventory = pgTable('student_inventory', {
 
 export type Student = typeof student.$inferSelect;
 export type StudentProfile = typeof studentProfile.$inferSelect;
+export type StudentInventory = typeof studentInventory.$inferSelect;

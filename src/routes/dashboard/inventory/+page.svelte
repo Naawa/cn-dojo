@@ -3,6 +3,9 @@
 
 	let { data }: { data: PageData } = $props();
 
+	let {student_inventory} = $derived(data)
+
+
 	// Fake inventory items
 	let inventory = $state([
 		{ id: 1, name: "Banner#1", price: 50, description: "lorem ipsum", category: "banner" },
