@@ -25,7 +25,7 @@
 		<button>Search</button>
 	</div>
 
-	<!-- Popular Items (Now on Top) -->
+	<!-- Popular Items -->
 	<div class="shop-container">
 		<h3>Popular Items</h3>
 		<div class="scrollable-grid">

@@ -1,7 +1,9 @@
 import { db } from "$lib/server/db";
 import { productImage as productImageTable, product as productTable, type Product, type ProductImage } from "$lib/server/db/schema/product.js";
+import { studentInventory, studentInventory as studentInventoryTable, type StudentInventory } from "$lib/server/db/schema/student.js";
 import { and, eq } from "drizzle-orm";
-
+import { fail } from "@sveltejs/kit";
+import type { Actions } from "./$types";
 
 export const load = async ({ params }) => {
     let productId = parseInt(params.product)
@@ -51,7 +53,25 @@ export const load = async ({ params }) => {
 };
 
 export const actions = {
-    //**
-    // Add product to inventory..
-    //  */
+	addToInventory: async ({ request, locals }) => {
+		const formData = await request.formData();
+		const productId = parseInt(formData.get("productId") as string);
+		const studentId = locals.student?.id;
+
+		if (!studentId || !productId) return { error: "Missing data" };
+
+		try {
+			await db.insert(studentInventory).values({
+                studentId,
+                productId,
+                id: 0
+            }satisfies StudentInventory);
+            
+			return { success: "Product added to inventory!" };
+		} catch (e) {
+			console.error("Error adding to inventory:", e);
+			return fail(500, { error: "Failed to add product to inventory." });
+		}
+	}
 };
+
