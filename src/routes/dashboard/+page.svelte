@@ -41,7 +41,7 @@
 				<h3>Popular Items</h3>
 				<p>Check out trending items in the store!</p>
 				<br>
-				<a href="/"><button class="primary">Visit Store</button></a>
+				<a href="/dashboard/shop"><button class="primary">Visit Store</button></a>
 			</div>
 		</div>
 

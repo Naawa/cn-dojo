@@ -1,24 +1,28 @@
 <script lang="ts">
 	import type { PageData } from './$types';
+	import type { Product } from '$lib/server/db/schema/product';
 
 	let { data }: { data: PageData } = $props();
 
-	let {student_inventory} = $derived(data)
+	let { student_inventory = [] } = $derived(data);
 
 
 	// Fake inventory items
-	let inventory = $state([
-		{ id: 1, name: "Banner#1", price: 50, description: "lorem ipsum", category: "banner" },
-        { id: 2, name: "Card#1", price: 100, description: "lorem ipsum", category: "card" },
-        { id: 3, name: "Profile Pic#1", price: 150, description: "lorem ipsum", category: "profilePic" },
-        { id: 4, name: "Banner#2", price: 200, description: "lorem ipsum", category: "banner" },
-        { id: 5, name: "Card#2", price: 250, description: "lorem ipsum", category: "card" },
-        { id: 6, name: "Profile Pic#2", price: 300, description: "lorem ipsum", category: "profilePic" },
-        { id: 7, name: "Banner#3", price: 350, description: "lorem ipsum", category: "banner" },
-        { id: 8, name: "Card#3", price: 400, description: "lorem ipsum", category: "card" },
-        { id: 9, name: "Profile Pic#3", price: 450, description: "lorem ipsum", category: "profilePic" },
-        { id: 10, name: "Banner#4", price: 500, description: "lorem ipsum", category: "banner" },
-	]);
+	// let inventory = $state([
+	// 	{ id: 1, name: "Banner#1", price: 50, description: "lorem ipsum", category: "banner" },
+    //     { id: 2, name: "Card#1", price: 100, description: "lorem ipsum", category: "card" },
+    //     { id: 3, name: "Profile Pic#1", price: 150, description: "lorem ipsum", category: "profilePic" },
+    //     { id: 4, name: "Banner#2", price: 200, description: "lorem ipsum", category: "banner" },
+	// ]);
+
+	let inventory = $state<Product[]>([]);
+
+	$effect(() => {
+		if (student_inventory) {
+			inventory = student_inventory;
+		}
+	});
+
 
 	let searchTerm: string = $state('');
 	let filteredInventory = $state([]);

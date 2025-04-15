@@ -56,20 +56,23 @@ export const actions = {
 	addToInventory: async ({ request, locals }) => {
 		const formData = await request.formData();
 		const productId = parseInt(formData.get("productId") as string);
-		const studentId = locals.student?.id;
 
-		if (!studentId || !productId) return { error: "Missing data" };
+		// Get student ID from session/local (or use a fallback during development)
+		const studentId = locals?.student?.id || "uuid-placeholder-1234"; // update in production
+
+		if (!studentId || !productId) {
+			return fail(400, { error: "Missing student or product ID" });
+		}
 
 		try {
-			await db.insert(studentInventory).values({
-                studentId,
-                productId,
-                id: 0
-            }satisfies StudentInventory);
-            
-			return { success: "Product added to inventory!" };
+			await db.insert(studentInventoryTable).values({
+				studentId,
+				productId
+			});
+
+			return { success: true };
 		} catch (e) {
-			console.error("Error adding to inventory:", e);
+			console.error("Insert failed:", e);
 			return fail(500, { error: "Failed to add product to inventory." });
 		}
 	}
