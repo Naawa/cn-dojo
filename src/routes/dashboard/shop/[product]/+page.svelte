@@ -44,7 +44,7 @@
 		<p class="description">{product?.description}</p>
 
 		<!-- Add to Inventory Button (TODO)-->
-		<form method="POST" use:enhance={(enhanceArgs) => {
+		<form method="POST" use:enhance={() => {
 			submitting = true;
 		
 			// Run the default enhancement behavior
