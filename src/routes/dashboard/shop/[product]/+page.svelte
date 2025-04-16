@@ -1,22 +1,40 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	import { goto } from '$app/navigation';
+	import type { Product } from '$lib/server/db/schema/product';
+
 	let { data } = $props();
 	let { product } = $derived(data);
+
 	let message = $state<string | null>(null);
 	let messageType = $state<'success' | 'error' | null>(null);
+	let submitting = $state(false);
 
-	// You could wire this in later with real student ID from session
-	// let studentId = "uuid-placeholder-1234"; // Replace with actual logged in student ID
+	function handleEnhance({ result }: { result: { type: string; data?: any } }) {
+		submitting = false;
+
+		if (result.type === 'success') {
+			message = 'Product added to inventory!';
+			messageType = 'success';
+		} else if (result.type === 'failure') {
+			message = result.data?.error || 'Something went wrong.';
+			messageType = 'error';
+		}
+
+		setTimeout(() => {
+			message = null;
+			messageType = null;
+		}, 3000);
+	}
 </script>
 
 <section class="product-page">
 	<!-- Product image -->
 	<div class="image-wrapper">
 		<img src="{product?.imageUrl}" alt="">
-    {#if !product?.imageUrl}
-      <div class="image-placeholder">No Image Available</div>
-    {/if}
+		{#if !product?.imageUrl}
+			<div class="image-placeholder">No Image Available</div>
+		{/if}
 	</div>
 
 	<!-- Product info -->
@@ -25,41 +43,30 @@
 		<p class="price">{product?.price} Points</p>
 		<p class="description">{product?.description}</p>
 
-		<!-- Buttons -->
-		<form method="POST" use:enhance={async ({ action, formData }) => {
-			const response = await fetch(action, {
-				method: 'POST',
-				body: formData
-			});
-
-			if (response.ok) {
-				message = 'Product added to inventory!';
-				messageType = 'success';
-
-				setTimeout(() => {
-					message = null;
-					messageType = null;
-				}, 3000); // hide after 3s
-			} else {
-				const data = await response.json();
-				message = data?.error || 'Something went wrong.';
-				messageType = 'error';
-			}
+		<!-- Add to Inventory Button (TODO)-->
+		<form method="POST" use:enhance={(enhanceArgs) => {
+			submitting = true;
+		
+			// Run the default enhancement behavior
+			return async ({ result }: { result: { type: string; data?: any } }) => {
+				submitting = false;
+				handleEnhance({ result });
+			};
 		}}>
+		
 			<input type="hidden" name="action" value="addToInventory" />
 			<input type="hidden" name="productId" value={product?.id} />
-			<button type="submit">Add to Inventory</button>
+			<button type="submit" disabled={submitting}>
+				{#if submitting}
+					Purchasing...
+				{/if}
+				{#if !submitting}Purchase{/if}
+			</button>
 		</form>
-		
-		{#if message}
-			<div class="toast {messageType}">
-				{message}
-			</div>
-		{/if}
 
-		<button>Wishlist</button>
-
-		<button onclick={() => goto("/dashboard/shop")}>← Back to Shop</button>
+		<!-- Other Buttons -->
+		<button class="secondary-btn">Wishlist</button>
+		<button class="danger-btn" onclick={() => goto("/dashboard/shop")}>← Back to Shop</button>
 	</div>
 </section>
 
@@ -115,20 +122,16 @@
 	}
 
 	button {
-    max-width: 190px;
-    min-width: 190px;
+		max-width: 200px;
+		min-width: 200px;
 		padding: 0.5rem 1rem;
-		border: none;
-		background-color: #2b72ff;
-		color: white;
-		border-radius: 4px;
-		cursor: pointer;
 		font-size: 1rem;
 		margin-top: 0.5rem;
 	}
 
-	button:hover {
-		background-color: #1c54c4;
+	button[disabled] {
+		background-color: #aaa;
+		cursor: not-allowed;
 	}
 
 	.toast {
@@ -153,5 +156,4 @@
 		from { opacity: 0; transform: translateY(-10px); }
 		to { opacity: 1; transform: translateY(0); }
 	}
-
 </style>

@@ -52,6 +52,7 @@ export const load = async ({ params }) => {
     }
 };
 
+// Adding a product to the inventory (TODO)
 export const actions = {
 	addToInventory: async ({ request, locals }) => {
 		const formData = await request.formData();
